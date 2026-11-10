@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { slugify, truncate, wordCount } from "./text.ts";
+import { slugify, truncate, wordCount, titleCase } from "./text.ts";
 
 test("slugify joins words with hyphens", () => {
   assert.equal(slugify("Hello, World!"), "hello-world");
@@ -16,4 +16,8 @@ test("truncate cuts long text and adds an ellipsis", () => {
 
 test("wordCount counts words", () => {
   assert.equal(wordCount("one two  three"), 3);
+});
+
+test("titleCase capitalises words and keeps spacing", () => {
+  assert.equal(titleCase("the QUICK  brown fox"), "The Quick  Brown Fox");
 });

@@ -1,4 +1,4 @@
-/** Small string helpers: slugify, truncate, wordCount. */
+/** Small string helpers: slugify, truncate, wordCount, titleCase. */
 
 /** Lowercase `text` and join its letters and digits with hyphens, for use in URLs. */
 export function slugify(text: string): string {
@@ -17,4 +17,9 @@ export function truncate(text: string, max: number): string {
 /** Count the words in `text`, where words are separated by whitespace. */
 export function wordCount(text: string): number {
   return text.split(/\s+/).length;
+}
+
+/** Capitalise the first letter of each word and lowercase the rest, keeping spacing. */
+export function titleCase(text: string): string {
+  return text.toLowerCase().replace(/(^|\s)(\S)/g, (_, space, ch) => space + ch.toUpperCase());
 }

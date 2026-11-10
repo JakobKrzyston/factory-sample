@@ -16,5 +16,6 @@ export function truncate(text: string, max: number): string {
 
 /** Count the words in `text`, where words are separated by whitespace. */
 export function wordCount(text: string): number {
-  return text.split(/\s+/).length;
+  const trimmed = text.trim();
+  return trimmed === "" ? 0 : trimmed.split(/\s+/).length;
 }

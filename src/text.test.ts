@@ -16,4 +16,7 @@ test("truncate cuts long text and adds an ellipsis", () => {
 
 test("wordCount counts words", () => {
   assert.equal(wordCount("one two  three"), 3);
+  assert.equal(wordCount(""), 0);
+  assert.equal(wordCount("   "), 0);
+  assert.equal(wordCount("  hi "), 1);
 });

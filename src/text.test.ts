@@ -6,6 +6,10 @@ test("slugify joins words with hyphens", () => {
   assert.equal(slugify("Hello, World!"), "hello-world");
 });
 
+test("slugify strips accents", () => {
+  assert.equal(slugify("Crème Brûlée"), "creme-brulee");
+});
+
 test("truncate leaves short text alone", () => {
   assert.equal(truncate("short", 10), "short");
 });

@@ -8,10 +8,23 @@ export function slugify(text: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
-/** Shorten `text` to at most `max` characters, ending with "…" when it was cut. */
-export function truncate(text: string, max: number): string {
+/**
+ * Shorten `text` to at most `max` characters, ending with "…" when it was cut.
+ * With `wordBoundary: true`, cut at the last whole word that fits instead of
+ * mid-word (falls back to a mid-word cut if the first word alone is too long).
+ */
+export function truncate(
+  text: string,
+  max: number,
+  options: { wordBoundary?: boolean } = {},
+): string {
   if (text.length <= max) return text;
-  return text.slice(0, max - 1) + "…";
+  let cut = text.slice(0, max - 1);
+  if (options.wordBoundary && !/\s/.test(text[max - 1] ?? "")) {
+    const end = cut.search(/\s+\S*$/);
+    if (end > 0) cut = cut.slice(0, end);
+  }
+  return cut.trimEnd() + "…";
 }
 
 /** Count the words in `text`, where words are separated by whitespace. */
